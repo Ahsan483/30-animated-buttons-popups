@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Unique Buttons & Popups</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f0f1a, #1a2a44);
+            min-height: 100vh;
+        }
+        .btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            text-transform: uppercase;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            padding: 20px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .close-btn:hover { color: #ff4444; }
+        h2 { margin: 0 0 10px; }
+        p { margin: 0; }
+
+        /* 1. Neon Pulse Orb */
+        .btn-1 { border-radius: 50%; background: radial-gradient(#ff00ff, #00ffff); box-shadow: 0 0 10px #ff00ff; animation: neonPulse 2s infinite; }
+        .popup-1 { width: 280px; background: #000; border: 2px solid #00ffff; box-shadow: 0 0 15px #00ffff; animation: portalOpen 0.5s ease; }
+        @keyframes neonPulse { 0%, 100% { box-shadow: 0 0 10px #ff00ff; } 50% { box-shadow: 0 0 15px #00ffff; } }
+        @keyframes portalOpen { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        /* 2. Liquid Ripple */
+        .btn-2 { border-radius: 15px; background: linear-gradient(45deg, #555, #aaa); position: relative; overflow: hidden; }
+        .btn-2::after { content: ''; position: absolute; width: 0; height: 0; background: rgba(255, 255, 255, 0.3); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: ripple 0.6s ease-out paused; }
+        .btn-2:active::after { animation-play-state: running; }
+        .popup-2 { width: 300px; background: rgba(170, 170, 170, 0.2); backdrop-filter: blur(5px); animation: liquidRise 0.6s ease; }
+        @keyframes ripple { 0% { width: 0; height: 0; opacity: 1; } 100% { width: 100px; height: 100px; opacity: 0; } }
+        @keyframes liquidRise { 0% { transform: translate(-50%, 100%) scaleY(0); } 100% { transform: translate(-50%, -50%) scaleY(1); } }
+
+        /* 3. Fractal Bloom */
+        .btn-3 { border-radius: 6px; background: #222; border: 2px solid #ffaa00; }
+        .popup-3 { width: 290px; background: #111; border: 2px dashed #ffaa00; animation: fractalBloom 0.7s ease; }
+        @keyframes fractalBloom { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; clip-path: polygon(50% 50%, 50% 50%, 50% 50%); } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); } }
+
+        /* 4. Holographic Slice */
+        .btn-4 { transform: skewX(-15deg); background: linear-gradient(90deg, #00f, #0ff); }
+        .popup-4 { width: 310px; background: rgba(0, 255, 255, 0.1); border: 1px solid #00f; animation: holoFlash 0.5s ease; }
+        @keyframes holoFlash { 0% { opacity: 0; filter: brightness(50%); } 50% { filter: brightness(150%); } 100% { opacity: 1; filter: brightness(100%); } }
+
+        /* 5. Gravity Orb */
+        .btn-5 { border-radius: 50%; background: #000; box-shadow: inset 0 0 8px #fff; position: relative; }
+        .btn-5::before { content: ''; position: absolute; width: 30px; height: 1px; background: #fff; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg); animation: orbit 3s infinite linear; }
+        .popup-5 { width: 280px; background: radial-gradient(circle, #fff, #000); border-radius: 10px; animation: gravityPull 0.6s ease; }
+        @keyframes orbit { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+        @keyframes gravityPull { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        /* 6. Prism Shard */
+        .btn-6 { clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%); background: linear-gradient(135deg, #f0f, #0ff); }
+        .popup-6 { width: 300px; background: rgba(255, 0, 255, 0.2); clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%); animation: shardGrow 0.5s ease; }
+        @keyframes shardGrow { 0% { transform: translate(-50%, -50%) scale(0.1); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        /* 7. Vortex Gate */
+        .btn-7 { border-radius: 50%; background: radial-gradient(#000, #00f); box-shadow: 0 0 10px #00f; animation: vortexSpin 2s infinite linear; }
+        .popup-7 { width: 290px; background: #000; border: 2px solid #00f; animation: vortexOpen 0.6s ease; }
+        @keyframes vortexSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes vortexOpen { 0% { transform: translate(-50%, -50%) rotate(360deg) scale(0); } 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } }
+
+        /* 8. Magnetic Wave */
+        .btn-8 { border-radius: 5px; background: #333; border: 1px solid #ff0; animation: wavePulse 1.5s infinite; }
+        .popup-8 { width: 310px; background: #222; border: 2px solid #ff0; animation: waveRise 0.5s ease; }
+        @keyframes wavePulse { 0%, 100% { box-shadow: 0 0 5px #ff0; } 50% { box-shadow: 0 0 15px #ff0; } }
+        @keyframes waveRise { 0% { transform: translate(-50%, 100%) scaleX(0); } 100% { transform: translate(-50%, -50%) scaleX(1); } }
+
+        /* 9. Pixel Dust */
+        .btn-9 { border-radius: 5px; background: #000; box-shadow: inset 0 0 5px #fff; }
+        .popup-9 { width: 280px; background: #111; animation: pixelSwarm 0.7s ease; }
+        @keyframes pixelSwarm { 0% { opacity: 0; clip-path: inset(50% 50% 50% 50%); } 100% { opacity: 1; clip-path: inset(0 0 0 0); } }
+
+        /* 10. Eclipse Glow */
+        .btn-10 { border-radius: 50%; background: #ff5500; box-shadow: 0 0 10px #ff5500; animation: eclipsePulse 2s infinite; }
+        .popup-10 { width: 300px; background: radial-gradient(#ff5500, #000); animation: eclipseFade 0.6s ease; }
+        @keyframes eclipsePulse { 0%, 100% { box-shadow: 0 0 10px #ff5500; } 50% { box-shadow: 0 0 20px #ff5500; } }
+        @keyframes eclipseFade { 0% { opacity: 0; filter: brightness(50%); } 100% { opacity: 1; filter: brightness(100%); } }
+
+        /* 11. Circuit Flow */
+        .btn-11 { border-radius: 5px; background: #001a00; border: 1px solid #00ff00; }
+        .popup-11 { width: 290px; background: #001a00; border: 2px solid #00ff00; animation: circuitLight 0.5s ease; }
+        @keyframes circuitLight { 0% { opacity: 0; box-shadow: none; } 100% { opacity: 1; box-shadow: 0 0 15px #00ff00; } }
+
+        /* 12. Bubble Burst */
+        .btn-12 { border-radius: 50%; background: linear-gradient(#aaf, #fff); }
+        .popup-12 { width: 280px; background: rgba(170, 170, 255, 0.3); border-radius: 15px; animation: bubbleInflate 0.5s ease; }
+        @keyframes bubbleInflate { 0% { transform: translate(-50%, -50%) scale(0); } 100% { transform: translate(-50%, -50%) scale(1); } }
+
+        /* 13. Quantum Flip */
+        .btn-13 { border-radius: 5px; background: #5500ff; perspective: 1000px; }
+        .popup-13 { width: 300px; background: #5500ff; animation: quantumSpin 0.6s ease; }
+        @keyframes quantumSpin { 0% { transform: translate(-50%, -50%) rotateY(90deg); } 100% { transform: translate(-50%, -50%) rotateY(0deg); } }
+
+        /* 14. Aether Shard */
+        .btn-14 { clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); background: linear-gradient(#0ff, #fff); }
+        .popup-14 { width: 290px; background: rgba(0, 255, 255, 0.2); clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%); animation: aetherFade 0.5s ease; }
+        @keyframes aetherFade { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+
+        /* 15. Sonic Pulse */
+        .btn-15 { border-radius: 50%; background: #ff0055; box-shadow: 0 0 10px #ff0055; animation: sonicPulse 1.5s infinite; }
+        .popup-15 { width: 280px; background: #ff0055; animation: sonicExpand 0.6s ease; }
+        @keyframes sonicPulse { 0%, 100% { box-shadow: 0 0 10px #ff0055; } 50% { box-shadow: 0 0 20px #ff0055; } }
+        @keyframes sonicExpand { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+        /* 16. Galactic Portal */
+        .btn-16 { border-radius: 50%; background: radial-gradient(#1a0033, #000); }
+        .popup-16 { width: 300px; background: radial-gradient(#1a0033, #000); border-radius: 50%; animation: portalSpin 0.7s ease; }
+        @keyframes portalSpin { 0% { transform: translate(-50%, -50%) rotate(360deg) scale(0); } 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } }
+
+        /* 17. Crystal Cocoon */
+        .btn-17 { border-radius: 5px; background: linear-gradient(135deg, #aaf, #fff); }
+        .popup-17 { width: 290px; background: rgba(170, 170, 255, 0.3); animation: cocoonUnfold 0.6s ease; }
+        @keyframes cocoonUnfold { 0% { transform: translate(-50%, -50%) scaleY(0); } 100% { transform: translate(-50%, -50%) scaleY(1); } }
+
+        /* 18. Digital Ribbon */
+        .btn-18 { border-radius: 5px; background: #00f; }
+        .popup-18 { width: 310px; background: #00f; animation: ribbonUnravel 0.5s ease; }
+        @keyframes ribbonUnravel { 0% { transform: translate(-50%, -50%) scaleX(0); } 100% { transform: translate(-50%, -50%) scaleX(1); } }
+
+        /* 19. Neon Grid */
+        .btn-19 { border-radius: 5px; background: #000; border: 1px solid #00ffcc; }
+        .popup-19 { width: 280px; background: #000; border: 2px solid #00ffcc; animation: gridDraw 0.6s ease; }
+        @keyframes gridDraw { 0% { clip-path: inset(100% 0 0 0); } 100% { clip-path: inset(0 0 0 0); } }
+
+        /* 20. Smoke Veil */
+        .btn-20 { border-radius: 5px; background: #333; }
+        .popup-20 { width: 300px; background: rgba(51, 51, 51, 0.8); animation: smokeSwirl 0.7s ease; }
+        @keyframes smokeSwirl { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+
+        /* 21. Origami Fold */
+        .btn-21 { border-radius: 5px; background: #fff; color: #000; }
+        .popup-21 { width: 290px; background: #fff; animation: origamiUnfold 0.6s ease; }
+        @keyframes origamiUnfold { 0% { transform: translate(-50%, -50%) rotateX(90deg); } 100% { transform: translate(-50%, -50%) rotateX(0deg); } }
+
+        /* 22. Aurora Wave */
+        .btn-22 { border-radius: 5px; background: linear-gradient(45deg, #0f0, #00f); }
+        .popup-22 { width: 310px; background: linear-gradient(45deg, #0f0, #00f); animation: auroraFade 0.5s ease; }
+        @keyframes auroraFade { 0% { opacity: 0; transform: translate(-50%, -50%) scaleY(0); } 100% { opacity: 1; transform: translate(-50%, -50%) scaleY(1); } }
+
+        /* 23. Glitch Frame */
+        .btn-23 { border-radius: 5px; background: #000; border: 1px solid #f00; }
+        .popup-23 { width: 280px; background: #000; border: 2px solid #f00; animation: glitchFlicker 0.5s ease; }
+        @keyframes glitchFlicker { 0% { opacity: 0.2; } 20% { opacity: 1; } 25% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* 24. Bubble Sphere */
+        .btn-24 { border-radius: 50%; background: radial-gradient(#aaf, #fff); }
+        .popup-24 { width: 300px; background: rgba(170, 170, 255, 0.3); border-radius: 50%; animation: sphereInflate 0.6s ease; }
+        @keyframes sphereInflate { 0% { transform: translate(-50%, -50%) scale(0); } 100% { transform: translate(-50%, -50%) scale(1); } }
+
+        /* 25. Circuit Board */
+        .btn-25 { border-radius: 5px; background: #001a00; border: 1px solid #0f0; }
+        .popup-25 { width: 290px; background: #001a00; border: 2px solid #0f0; animation: boardLight 0.5s ease; }
+        @keyframes boardLight { 0% { opacity: 0; box-shadow: none; } 100% { opacity: 1; box-shadow: 0 0 15px #0f0; } }
+
+        /* 26. Holo-Deck */
+        .btn-26 { border-radius: 5px; background: rgba(0, 255, 255, 0.1); border: 1px solid #0ff; }
+        .popup-26 { width: 310px; background: rgba(0, 255, 255, 0.1); animation: holoProject 0.6s ease; }
+        @keyframes holoProject { 0% { transform: translate(-50%, 100%) scaleY(0); } 100% { transform: translate(-50%, -50%) scaleY(1); } }
+
+        /* 27. Meteor Shower */
+        .btn-27 { border-radius: 5px; background: #000; border: 1px solid #fff; }
+        .popup-27 { width: 280px; background: #000; border: 2px solid #fff; animation: meteorStreak 0.7s ease; }
+        @keyframes meteorStreak { 0% { opacity: 0; transform: translate(-50%, -50%) skewX(30deg); } 100% { opacity: 1; transform: translate(-50%, -50%) skewX(0deg); } }
+
+        /* 28. Liquid Tank */
+        .btn-28 { border-radius: 5px; background: linear-gradient(#00f, #0ff); }
+        .popup-28 { width: 300px; background: rgba(0, 255, 255, 0.2); animation: tankFill 0.6s ease; }
+        @keyframes tankFill { 0% { clip-path: inset(100% 0 0 0); } 100% { clip-path: inset(0 0 0 0); } }
+
+        /* 29. Pixel Storm */
+        .btn-29 { border-radius: 5px; background: #111; box-shadow: inset 0 0 5px #fff; }
+        .popup-29 { width: 290px; background: #111; animation: pixelStorm 0.7s ease; }
+        @keyframes pixelStorm { 0% { opacity: 0; clip-path: inset(50% 50% 50% 50%); } 100% { opacity: 1; clip-path: inset(0 0 0 0); } }
+
+        /* 30. Time Warp */
+        .btn-30 { border-radius: 50%; background: #550055; box-shadow: 0 0 10px #550055; animation: timePulse 2s infinite; }
+        .popup-30 { width: 280px; background: #550055; animation: timeWind 0.6s ease; }
+        @keyframes timePulse { 0%, 100% { box-shadow: 0 0 10px #550055; } 50% { box-shadow: 0 0 20px #550055; } }
+        @keyframes timeWind { 0% { transform: translate(-50%, -50%) rotate(360deg) scale(0); } 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } }
+    </style>
+</head>
+<body>
+    <!-- 1-30 Button and Popup Pairs -->
+    <button class="btn btn-1" onclick="showPopup('popup-1')">Neon</button>
+    <div class="overlay" id="overlay-1" onclick="hidePopup('popup-1')"></div>
+    <div class="popup popup-1" id="popup-1"><span class="close-btn" onclick="hidePopup('popup-1')">×</span><h2 style="color: #00ffff;">Neon Pulse</h2><p style="color: #fff;">Glows bright.</p></div>
+
+    <button class="btn btn-2" onclick="showPopup('popup-2')">Liquid</button>
+    <div class="overlay" id="overlay-2" onclick="hidePopup('popup-2')"></div>
+    <div class="popup popup-2" id="popup-2"><span class="close-btn" onclick="hidePopup('popup-2')">×</span><h2 style="color: #fff;">Liquid Flow</h2><p style="color: #ddd;">Smooth vibes.</p></div>
+
+    <button class="btn btn-3" onclick="showPopup('popup-3')">Fractal</button>
+    <div class="overlay" id="overlay-3" onclick="hidePopup('popup-3')"></div>
+    <div class="popup popup-3" id="popup-3"><span class="close-btn" onclick="hidePopup('popup-3')">×</span><h2 style="color: #ffaa00;">Fractal Bloom</h2><p style="color: #fff;">Infinite.</p></div>
+
+    <button class="btn btn-4" onclick="showPopup('popup-4')">Holo</button>
+    <div class="overlay" id="overlay-4" onclick="hidePopup('popup-4')"></div>
+    <div class="popup popup-4" id="popup-4"><span class="close-btn" onclick="hidePopup('popup-4')">×</span><h2 style="color: #00f;">Holo Slice</h2><p style="color: #0ff;">Future now.</p></div>
+
+    <button class="btn btn-5" onclick="showPopup('popup-5')">Gravity</button>
+    <div class="overlay" id="overlay-5" onclick="hidePopup('popup-5')"></div>
+    <div class="popup popup-5" id="popup-5"><span class="close-btn" onclick="hidePopup('popup-5')">×</span><h2 style="color: #000;">Gravity Orb</h2><p style="color: #333;">Pulls you in.</p></div>
+
+    <button class="btn btn-6" onclick="showPopup('popup-6')">Prism</button>
+    <div class="overlay" id="overlay-6" onclick="hidePopup('popup-6')"></div>
+    <div class="popup popup-6" id="popup-6"><span class="close-btn" onclick="hidePopup('popup-6')">×</span><h2 style="color: #fff;">Prism Shard</h2><p style="color: #f0f;">Refracts light.</p></div>
+
+    <button class="btn btn-7" onclick="showPopup('popup-7')">Vortex</button>
+    <div class="overlay" id="overlay-7" onclick="hidePopup('popup-7')"></div>
+    <div class="popup popup-7" id="popup-7"><span class="close-btn" onclick="hidePopup('popup-7')">×</span><h2 style="color: #00f;">Vortex Gate</h2><p style="color: #fff;">Swirls deep.</p></div>
+
+    <button class="btn btn-8" onclick="showPopup('popup-8')">Wave</button>
+    <div class="overlay" id="overlay-8" onclick="hidePopup('popup-8')"></div>
+    <div class="popup popup-8" id="popup-8"><span class="close-btn" onclick="hidePopup('popup-8')">×</span><h2 style="color: #ff0;">Magnetic Wave</h2><p style="color: #fff;">Pulses out.</p></div>
+
+    <button class="btn btn-9" onclick="showPopup('popup-9')">Pixel</button>
+    <div class="overlay" id="overlay-9" onclick="hidePopup('popup-9')"></div>
+    <div class="popup popup-9" id="popup-9"><span class="close-btn" onclick="hidePopup('popup-9')">×</span><h2 style="color: #fff;">Pixel Dust</h2><p style="color: #ddd;">Scatters free.</p></div>
+
+    <button class="btn btn-10" onclick="showPopup('popup-10')">Eclipse</button>
+    <div class="overlay" id="overlay-10" onclick="hidePopup('popup-10')"></div>
+    <div class="popup popup-10" id="popup-10"><span class="close-btn" onclick="hidePopup('popup-10')">×</span><h2 style="color: #ff5500;">Eclipse Glow</h2><p style="color: #fff;">Darkens bright.</p></div>
+
+    <button class="btn btn-11" onclick="showPopup('popup-11')">Circuit</button>
+    <div class="overlay" id="overlay-11" onclick="hidePopup('popup-11')"></div>
+    <div class="popup popup-11" id="popup-11"><span class="close-btn" onclick="hidePopup('popup-11')">×</span><h2 style="color: #00ff00;">Circuit Flow</h2><p style="color: #fff;">Powers up.</p></div>
+
+    <button class="btn btn-12" onclick="showPopup('popup-12')">Bubble</button>
+    <div class="overlay" id="overlay-12" onclick="hidePopup('popup-12')"></div>
+    <div class="popup popup-12" id="popup-12"><span class="close-btn" onclick="hidePopup('popup-12')">×</span><h2 style="color: #aaf;">Bubble Burst</h2><p style="color: #fff;">Pops alive.</p></div>
+
+    <button class="btn btn-13" onclick="showPopup('popup-13')">Quantum</button>
+    <div class="overlay" id="overlay-13" onclick="hidePopup('popup-13')"></div>
+    <div class="popup popup-13" id="popup-13"><span class="close-btn" onclick="hidePopup('popup-13')">×</span><h2 style="color: #fff;">Quantum Flip</h2><p style="color: #ddd;">Spins reality.</p></div>
+
+    <button class="btn btn-14" onclick="showPopup('popup-14')">Aether</button>
+    <div class="overlay" id="overlay-14" onclick="hidePopup('popup-14')"></div>
+    <div class="popup popup-14" id="popup-14"><span class="close-btn" onclick="hidePopup('popup-14')">×</span><h2 style="color: #fff;">Aether Shard</h2><p style="color: #0ff;">Floats ethereal.</p></div>
+
+    <button class="btn btn-15" onclick="showPopup('popup-15')">Sonic</button>
+    <div class="overlay" id="overlay-15" onclick="hidePopup('popup-15')"></div>
+    <div class="popup popup-15" id="popup-15"><span class="close-btn" onclick="hidePopup('popup-15')">×</span><h2 style="color: #fff;">Sonic Pulse</h2><p style="color: #ddd;">Vibrates loud.</p></div>
+
+    <button class="btn btn-16" onclick="showPopup('popup-16')">Galaxy</button>
+    <div class="overlay" id="overlay-16" onclick="hidePopup('popup-16')"></div>
+    <div class="popup popup-16" id="popup-16"><span class="close-btn" onclick="hidePopup('popup-16')">×</span><h2 style="color: #ff00ff;">Galactic Portal</h2><p style="color: #fff;">Stars align.</p></div>
+
+    <button class="btn btn-17" onclick="showPopup('popup-17')">Crystal</button>
+    <div class="overlay" id="overlay-17" onclick="hidePopup('popup-17')"></div>
+    <div class="popup popup-17" id="popup-17"><span class="close-btn" onclick="hidePopup('popup-17')">×</span><h2 style="color: #aaf;">Crystal Cocoon</h2><p style="color: #fff;">Unfolds beauty.</p></div>
+
+    <button class="btn btn-18" onclick="showPopup('popup-18')">Ribbon</button>
+    <div class="overlay" id="overlay-18" onclick="hidePopup('popup-18')"></div>
+    <div class="popup popup-18" id="popup-18"><span class="close-btn" onclick="hidePopup('popup-18')">×</span><h2 style="color: #fff;">Digital Ribbon</h2><p style="color: #ddd;">Flows sleek.</p></div>
+
+    <button class="btn btn-19" onclick="showPopup('popup-19')">Grid</button>
+    <div class="overlay" id="overlay-19" onclick="hidePopup('popup-19')"></div>
+    <div class="popup popup-19" id="popup-19"><span class="close-btn" onclick="hidePopup('popup-19')">×</span><h2 style="color: #00ffcc;">Neon Grid</h2><p style="color: #fff;">Lines glow.</p></div>
+
+    <button class="btn btn-20" onclick="showPopup('popup-20')">Smoke</button>
+    <div class="overlay" id="overlay-20" onclick="hidePopup('popup-20')"></div>
+    <div class="popup popup-20" id="popup-20"><span class="close-btn" onclick="hidePopup('popup-20')">×</span><h2 style="color: #fff;">Smoke Veil</h2><p style="color: #ddd;">Mysterious mist.</p></div>
+
+    <button class="btn btn-21" onclick="showPopup('popup-21')">Origami</button>
+    <div class="overlay" id="overlay-21" onclick="hidePopup('popup-21')"></div>
+    <div class="popup popup-21" id="popup-21"><span class="close-btn" onclick="hidePopup('popup-21')">×</span><h2 style="color: #000;">Origami Fold</h2><p style="color: #333;">Paper art.</p></div>
+
+    <button class="btn btn-22" onclick="showPopup('popup-22')">Aurora</button>
+    <div class="overlay" id="overlay-22" onclick="hidePopup('popup-22')"></div>
+    <div class="popup popup-22" id="popup-22"><span class="close-btn" onclick="hidePopup('popup-22')">×</span><h2 style="color: #fff;">Aurora Wave</h2><p style="color: #ddd;">Sky dance.</p></div>
+
+    <button class="btn btn-23" onclick="showPopup('popup-23')">Glitch</button>
+    <div class="overlay" id="overlay-23" onclick="hidePopup('popup-23')"></div>
+    <div class="popup popup-23" id="popup-23"><span class="close-btn" onclick="hidePopup('popup-23')">×</span><h2 style="color: #f00;">Glitch Frame</h2><p style="color: #fff;">Digital error.</p></div>
+
+    <button class="btn btn-24" onclick="showPopup('popup-24')">Sphere</button>
+    <div class="overlay" id="overlay-24" onclick="hidePopup('popup-24')"></div>
+    <div class="popup popup-24" id="popup-24"><span class="close-btn" onclick="hidePopup('popup-24')">×</span><h2 style="color: #aaf;">Bubble Sphere</h2><p style="color: #fff;">Floats free.</p></div>
+
+    <button class="btn btn-25" onclick="showPopup('popup-25')">Board</button>
+    <div class="overlay" id="overlay-25" onclick="hidePopup('popup-25')"></div>
+    <div class="popup popup-25" id="popup-25"><span class="close-btn" onclick="hidePopup('popup-25')">×</span><h2 style="color: #0f0;">Circuit Board</h2><p style="color: #fff;">Tech core.</p></div>
+
+    <button class="btn btn-26" onclick="showPopup('popup-26')">Holo</button>
+    <div class="overlay" id="overlay-26" onclick="hidePopup('popup-26')"></div>
+    <div class="popup popup-26" id="popup-26"><span class="close-btn" onclick="hidePopup('popup-26')">×</span><h2 style="color: #0ff;">Holo-Deck</h2><p style="color: #fff;">Projects up.</p></div>
+
+    <button class="btn btn-27" onclick="showPopup('popup-27')">Meteor</button>
+    <div class="overlay" id="overlay-27" onclick="hidePopup('popup-27')"></div>
+    <div class="popup popup-27" id="popup-27"><span class="close-btn" onclick="hidePopup('popup-27')">×</span><h2 style="color: #fff;">Meteor Shower</h2><p style="color: #ddd;">Streaks fast.</p></div>
+
+    <button class="btn btn-28" onclick="showPopup('popup-28')">Tank</button>
+    <div class="overlay" id="overlay-28" onclick="hidePopup('popup-28')"></div>
+    <div class="popup popup-28" id="popup-28"><span class="close-btn" onclick="hidePopup('popup-28')">×</span><h2 style="color: #fff;">Liquid Tank</h2><p style="color: #0ff;">Fills smooth.</p></div>
+
+    <button class="btn btn-29" onclick="showPopup('popup-29')">Storm</button>
+    <div class="overlay" id="overlay-29" onclick="hidePopup('popup-29')"></div>
+    <div class="popup popup-29" id="popup-29"><span class="close-btn" onclick="hidePopup('popup-29')">×</span><h2 style="color: #fff;">Pixel Storm</h2><p style="color: #ddd;">Particles fly.</p></div>
+
+    <button class="btn btn-30" onclick="showPopup('popup-30')">Time</button>
+    <div class="overlay" id="overlay-30" onclick="hidePopup('popup-30')"></div>
+    <div class="popup popup-30" id="popup-30"><span class="close-btn" onclick="hidePopup('popup-30')">×</span><h2 style="color: #fff;">Time Warp</h2><p style="color: #ddd;">Winds back.</p></div>
+
+    <script>
+        function showPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+            document.getElementById(`overlay-${popupId.split('-')[1]}`).style.display = 'block';
+        }
+        function hidePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.getElementById(`overlay-${popupId.split('-')[1]}`).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
